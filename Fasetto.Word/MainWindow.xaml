@@ -8,7 +8,7 @@
         Icon="Images/Logo/merk.png"
         WindowStyle="none"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="{Binding Test}"/>
+    </StackPanel>
 </Window>
