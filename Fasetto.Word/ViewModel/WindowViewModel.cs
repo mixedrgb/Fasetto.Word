@@ -104,7 +104,12 @@ namespace Fasetto.Word
             // Listen for the window resizing.
             _mWindow.StateChanged += (sender, e) =>
             {
-
+                // Event for all properties that are affected by a resize.
+                OnPropertyChanged(nameof(ResizeBorderThickness));
+                OnPropertyChanged(nameof(OuterMarginSize));
+                OnPropertyChanged(nameof(OuterMarginSizeThickness));
+                OnPropertyChanged(nameof(WindowRadius));
+                OnPropertyChanged(nameof(WindowCornerRadius));
             };
         }
         #endregion
