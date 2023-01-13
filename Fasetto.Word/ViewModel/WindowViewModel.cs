@@ -34,7 +34,63 @@ namespace Fasetto.Word
 
         #region Public Properties
         
-        public string Test { get; set; } = "My string";
+
+        /// <summary>
+        /// The size of the resize border around the window.
+        /// </summary>
+        public int ResizeBorder { get; set; } = 6;
+
+
+        /// <summary>
+        /// The size of the resize border around the window, taking into account the outer margin.
+        /// Resizes the window's border thickness. See <see cref="ResizeBorder">ResizeBorder</see>.
+        /// </summary>
+        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder); } }
+
+
+        /// <summary>
+        /// Get the value of the outer margin size. See <see cref="_mOuterMarginSize">_mOuterMarginSize</see>.
+        /// </summary>
+        public int OuterMarginSize
+        {
+            get
+            {
+                return _mWindow.WindowState == WindowState.Maximized ? 0 : _mOuterMarginSize;
+            }
+            set
+            {
+                _mOuterMarginSize = value;
+            }
+        }
+
+
+        /// <summary>
+        /// The thickness of the outer margin. See <see cref="OuterMarginSize">OuterMarginSize</see>.
+        /// </summary>
+        public Thickness OuterMarginSizeThickness { get { return new Thickness(OuterMarginSize); } }
+
+
+        /// <summary>
+        /// Gets the radius value of the edges of the window. See <see cref="_mWindowRadius">_mWindowRadius</see>.
+        /// </summary>
+        public int WindowRadius
+        {
+            get
+            {
+                return _mWindow.WindowState == WindowState.Maximized ? 0 : _mWindowRadius;
+            }
+            set
+            {
+                _mWindowRadius = value;
+            }
+        }
+
+
+        /// <summary>
+        /// The corner radius of the edges of the window
+        /// </summary>
+        public CornerRadius  WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
+
         #endregion
 
         #region Constructor
