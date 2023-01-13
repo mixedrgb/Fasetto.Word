@@ -19,6 +19,17 @@ namespace Fasetto.Word
         /// </summary>
         private Window _mWindow;
 
+
+        /// <summary>
+        /// The margin around the window to allow for a drop shadow
+        /// </summary>
+        private int _mOuterMarginSize = 10;
+
+
+        /// <summary>
+        /// The radius of the edges of the window
+        /// </summary>
+        private int _mWindowRadius = 10;
         #endregion
 
         #region Public Properties
