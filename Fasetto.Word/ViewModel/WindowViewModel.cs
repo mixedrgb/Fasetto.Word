@@ -99,7 +99,13 @@ namespace Fasetto.Word
         /// </summary>
         public WindowViewModel(Window window)
         {
+            _mWindow= window;
 
+            // Listen for the window resizing.
+            _mWindow.StateChanged += (sender, e) =>
+            {
+
+            };
         }
         #endregion
     }
