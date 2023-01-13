@@ -12,7 +12,7 @@ namespace Fasetto.Word
     /// Base view model that "fires" Property Changed events as needed
     /// </summary>
     //[AddINotifyPropertyChangedInterface]
-    public class BaseViewModel : AddINotifyPropertyChangedInterfaceAttribute
+    public class BaseViewModel : INotifyPropertyChanged // No longer need Fody Weaver code
     {
         /// <summary>
         /// The event that is fired when any child property changes its value
