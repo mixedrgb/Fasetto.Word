@@ -93,6 +93,35 @@ namespace Fasetto.Word
 
         #endregion
 
+        #region Commands
+
+        /// <summary>
+        /// The command to minimize the window
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+
+
+        /// <summary>
+        /// The command to maximize the window
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+
+
+        /// <summary>
+        /// The command to close the window
+        /// </summary>
+        public ICommand CloseCommand {get; set; }
+
+
+        /// <summary>
+        /// The command to show the system menu of the window
+        /// </summary>
+        public ICommand MenuCommand {get; set; }
+
+
+
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Default Constructor
@@ -111,6 +140,19 @@ namespace Fasetto.Word
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
+
+            // Create commands
+
+            MinimizeCommand = new RelayCommand(() => _mWindow.WindowState = WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => _mWindow.WindowState ^= WindowState.Minimized);
+            CloseCommand = new RelayCommand(() => _mWindow.Close());
+            MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(_mWindow, GetMousePosition()));
+        }
+
+
+
+        #endregion
+
         #region Private Helpers
 
         /// <summary>
