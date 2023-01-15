@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Fasetto.Word
 {
@@ -33,7 +37,7 @@ namespace Fasetto.Word
         #endregion
 
         #region Public Properties
-        
+
 
         /// <summary>
         /// The size of the resize border around the window.
@@ -91,6 +95,16 @@ namespace Fasetto.Word
         /// </summary>
         public CornerRadius  WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
 
+        /// <summary>
+        /// The height of the caption bar / title bar
+        /// </summary>
+        public int TitleHeight { get; set; } = 42;
+
+        /// <summary>
+        /// The height of the caption bar / title bar
+        /// </summary>
+        public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight); } }
+
         #endregion
 
         #region Commands
@@ -128,7 +142,7 @@ namespace Fasetto.Word
         /// </summary>
         public WindowViewModel(Window window)
         {
-            _mWindow= window;
+            _mWindow = window;
 
             // Listen for the window resizing.
             _mWindow.StateChanged += (sender, e) =>
