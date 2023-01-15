@@ -111,6 +111,19 @@ namespace Fasetto.Word
                 OnPropertyChanged(nameof(WindowRadius));
                 OnPropertyChanged(nameof(WindowCornerRadius));
             };
+        #region Private Helpers
+
+        /// <summary>
+        /// Gets the current mouse position on the screen
+        /// </summary>
+        /// <returns></returns>
+        private Point GetMousePosition()
+        {
+            // Position of the mouse relative to the window
+            var position = Mouse.GetPosition(_mWindow);
+
+            // Add the window position so it's a "ToScreen"
+            return new Point(position.X + _mWindow.Left, position.Y + _mWindow.Top);
         }
         #endregion
     }
