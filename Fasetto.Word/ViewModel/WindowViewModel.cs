@@ -38,6 +38,16 @@ namespace Fasetto.Word
 
         #region Public Properties
 
+        /// <summary>
+        /// The smallest width the window can go to
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+
+        /// <summary>
+        /// The smallest height the window can go to
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+
 
         /// <summary>
         /// The size of the resize border around the window.
@@ -49,7 +59,13 @@ namespace Fasetto.Word
         /// The size of the resize border around the window, taking into account the outer margin.
         /// Resizes the window's border thickness. See <see cref="ResizeBorder">ResizeBorder</see>.
         /// </summary>
-        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder); } }
+        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
+
+
+        /// <summary>
+        /// The padding of the inner content of the main window
+        /// </summary>
+        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
 
 
         /// <summary>
@@ -137,6 +153,7 @@ namespace Fasetto.Word
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -158,7 +175,7 @@ namespace Fasetto.Word
             // Create commands
 
             MinimizeCommand = new RelayCommand(() => _mWindow.WindowState = WindowState.Minimized);
-            MaximizeCommand = new RelayCommand(() => _mWindow.WindowState ^= WindowState.Minimized);
+            MaximizeCommand = new RelayCommand(() => _mWindow.WindowState ^= WindowState.Maximized);
             CloseCommand = new RelayCommand(() => _mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(_mWindow, GetMousePosition()));
 
