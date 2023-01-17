@@ -6,15 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fasetto.Word"
         mc:Ignorable="d"
-        WindowStyle="None"
+        WindowStyle="None" 
         ResizeMode="CanResize"
-        MinHeight="300"
-        MinWidth="400"
+        MinHeight="{Binding WindowMinimumHeight}"
+        MinWidth="{Binding WindowMinimumWidth}"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         x:Name="AppWindow"
         Icon="Images/Logo/merk.png"
-        Title="MainWindow" Height="600" Width="900">
+        Title="Welcome, Frend!"
+        Height="600" Width="900">
+
     <Window.Resources>
 
         <Style TargetType="{x:Type local:MainWindow}">
@@ -28,26 +30,34 @@
 
                             <!--Main window outline -->
                             <Grid>
+
+                                <!-- Opacity mask for corners on grid -->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
+
                                 <!-- Window border and dropshadow -->
                                 <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
                                         Background="{Binding ForegroundLightBrush, FallbackValue=White}">
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2"></DropShadowEffect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                                     </Border.Effect>
-
-
                                 </Border>
 
                                 <!-- Main window content -->
                                 <Grid>
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
                                     <Grid.RowDefinitions>
                                         <!-- Title bar -->
                                         <RowDefinition Height="{Binding TitleHeightGridLength,
                                                 FallbackValue=42}"/>
-
-                                        <!-- Drop shadow -->
+<!--
+                                        Drop shadow 
                                         <RowDefinition Height="Auto"/>
-
+-->
                                         <!-- Window content -->
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
@@ -75,10 +85,43 @@
 
                                         <!-- Title text -->
                                         <Viewbox Grid.Column="1" Margin="0">
-                                            <TextBlock FontSize="100"  Text="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                            <TextBlock Style="{StaticResource HeaderText}" FontSize="100"  Text="{Binding RelativeSource={RelativeSource TemplatedParent},
                                                     Path=Title, FallbackValue='Welcome, Friend'}"/>
                                         </Viewbox>
+
+                                        <!-- Window buttons -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_"/>
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[ ]"/>
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X"/>
+                                        </StackPanel>
                                     </Grid>
+<!--
+                                     Drop shadow 
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
+                                         Underline 
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+
+                                         Drop shadow
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+-->
+                                    <!-- Page Content -->
+                                    <!-- Removing the drop shadow should move this Grid.Row to "1" -->
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
                                 </Grid>
                             </Grid>
                         </Border>
@@ -92,7 +135,12 @@
         <WindowChrome
             ResizeBorderThickness="{Binding ResizeBorderThickness}"
             CaptionHeight="{Binding TitleHeight}"
+            CornerRadius="0"
             GlassFrameThickness="0">
         </WindowChrome>
     </WindowChrome.WindowChrome>
+
+    <Grid Background="{StaticResource ForegroundLightBrush}">
+        <Frame x:Name="MainFrame" Content="{Binding CurrentPage}" />
+    </Grid>
 </Window>
