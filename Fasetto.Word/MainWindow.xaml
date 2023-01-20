@@ -83,10 +83,14 @@
                                             <Image Source="/Images/Logo/merk.png"/>
                                         </Button>
 
-                                        <!-- Title text -->
-                                        <Viewbox Grid.Column="1" Margin="0">
-                                            <TextBlock Style="{StaticResource HeaderText}" FontSize="100"  Text="{Binding RelativeSource={RelativeSource TemplatedParent},
-                                                    Path=Title, FallbackValue='Welcome, Friend'}"/>
+                                        <!-- Title -->
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+                                            <StackPanel>
+                                                <TextBlock FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}" Margin="0,0,0,-5">
+                                                    <Run Text="W" Foreground="{StaticResource WordOrangeBrush}"/><Run Text="R" Foreground="{StaticResource WordBlueBrush}"/><Run Text="O" Foreground="{StaticResource WordRedBrush}"/><Run Text="D" Foreground="{StaticResource WordGreenBrush}"/>
+                                                </TextBlock>
+                                                <TextBlock Text="By Fasetto" Foreground="{StaticResource ForegroundDarkBrush}" TextAlignment="Center" />
+                                            </StackPanel>
                                         </Viewbox>
 
                                         <!-- Window buttons -->
@@ -141,6 +145,6 @@
     </WindowChrome.WindowChrome>
 
     <Grid Background="{StaticResource ForegroundLightBrush}">
-        <Frame x:Name="MainFrame" Content="{Binding CurrentPage}" />
+        <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" />
     </Grid>
 </Window>
