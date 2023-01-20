@@ -34,6 +34,12 @@ namespace Fasetto.Word
         /// The radius of the edges of the window
         /// </summary>
         private int _mWindowRadius = 10;
+
+        /// <summary>
+        /// The last known dock position
+        /// </summary>
+        private WindowDockPosition _mDockPosition = WindowDockPosition.Undocked;
+
         #endregion
 
         #region Public Properties
@@ -48,11 +54,18 @@ namespace Fasetto.Word
         /// </summary>
         public double WindowMinimumHeight { get; set; } = 400;
 
+        public bool Borderless
+        {
+            get
+            {
+                return (_mWindow.WindowState == WindowState.Maximized || _mDockPosition != WindowDockPosition.Undocked);
+            }
+        }
 
         /// <summary>
         /// The size of the resize border around the window.
         /// </summary>
-        public int ResizeBorder { get; set; } = 6;
+        public int ResizeBorder { get { return Borderless ? 0 : 6; } }
 
 
         /// <summary>
@@ -65,7 +78,7 @@ namespace Fasetto.Word
         /// <summary>
         /// The padding of the inner content of the main window
         /// </summary>
-        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
+        public Thickness InnerContentPadding { get; set; } = new Thickness(0);
 
 
         /// <summary>
@@ -75,7 +88,8 @@ namespace Fasetto.Word
         {
             get
             {
-                return _mWindow.WindowState == WindowState.Maximized ? 0 : _mOuterMarginSize;
+                return Borderless ? 0 : _mOuterMarginSize;
+                //return _mWindow.WindowState == WindowState.Maximized ? 0 : _mOuterMarginSize;
             }
             set
             {
