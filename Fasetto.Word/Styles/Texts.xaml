@@ -40,6 +40,7 @@
                                    Padding="{TemplateBinding Padding}"
                                    VerticalAlignment="Center"
                                    Foreground="{StaticResource ForegroundVeryDarkBrush}">
+<!--
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -50,7 +51,8 @@
                                     </Style.Triggers>
                                 </Style>
                             </TextBlock.Style>
-                        </TextBlock>
+-->
+                    </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
