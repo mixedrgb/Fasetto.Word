@@ -38,21 +38,12 @@
                                    x:Name="placeholder"
                                    FontFamily="{StaticResource LatoThin}"
                                    Padding="{TemplateBinding Padding}"
+                                   Visibility="{TemplateBinding local:HasTextProperty.Value,
+                                                Converter={local:BooleanToVisibilityConverter}}"
                                    VerticalAlignment="Center"
                                    Foreground="{StaticResource ForegroundVeryDarkBrush}">
-<!--
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
--->
-                    </TextBlock>
+
+                        </TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
