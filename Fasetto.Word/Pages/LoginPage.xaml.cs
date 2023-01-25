@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace Fasetto.Word
 {
@@ -14,9 +13,9 @@ namespace Fasetto.Word
         }
 
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            this.AnimateOut();
+            await this.AnimateOut();
         }
     }
 }
